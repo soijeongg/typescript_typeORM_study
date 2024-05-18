@@ -1,9 +1,11 @@
 import express from 'express';
 import app from './app';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv'
 import { AppDataSource } from './dataSource';
+import path from 'path';
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') })
+
 const PORT = process.env.PORT || 3000;
 AppDataSource.initialize()
   .then(() => {
