@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { User } from './entities/user';
-import  dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -13,6 +13,9 @@ export const AppDataSource = new DataSource({
   password: process.env.TYPEORM_PASSWORD,
   database: process.env.TYPEORM_DATABASE,
   synchronize: process.env.TYPEORM_SYNCHRONIZE === 'true',
+  ssl: {
+    rejectUnauthorized: false,
+  },
   logging: process.env.TYPEORM_LOGGING === 'true',
   entities: [User],
   migrations: [],
@@ -26,7 +29,3 @@ AppDataSource.initialize()
   .catch((err) => {
     console.error('Error during Data Source initialization:', err);
   });
-
-
-
-
