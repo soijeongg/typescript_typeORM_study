@@ -1,3 +1,4 @@
+import { AppDataSource } from '../dataSource';
 import { getRepository } from 'typeorm';
 import { IUser } from '../interfaces/user/iuser';
 import { IuserRespository } from '../interfaces/user/iuserRespository';
@@ -8,7 +9,7 @@ import {
 import { User } from '../entities/user';
 
 export class UserRepository implements IuserRespository {
-  private userRepository = getRepository(User);
+  private userRepository =  AppDataSource.getRepository(User);
 
   async createUser(userRequest: IUserRequest): Promise<IUser> {
     const newUser = this.userRepository.create(userRequest);

@@ -24,6 +24,6 @@ app.get('/', async (req: Request, res: Response) => {
   res.send('<h1>시작하는 지점</h1>');
 });
 
-app.use('api', router);
+app.use('/api', router);
 
 export default app;
