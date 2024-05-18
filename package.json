@@ -10,7 +10,6 @@
     "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
     "clean": "tsc --build --clean",
     "prettier": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,md}'"
-
   },
   "author": "soi",
   "license": "ISC",
@@ -42,6 +41,7 @@
     "passport-jwt": "^4.0.1",
     "passport-kakao": "^1.0.1",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "pg": "^8.11.5",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.20"

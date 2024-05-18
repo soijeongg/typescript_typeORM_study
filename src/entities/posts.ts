@@ -27,7 +27,7 @@ export class Posts {
   User!: User;
 
   @OneToMany(() => Comment, (Comment) => Comment.Posts)
-  Comment!: Comment;
+  Comment!: Comment[];
 
   @ManyToOne(() => subCategories, (subCategories) => subCategories.Posts)
   subCategories!: subCategories;

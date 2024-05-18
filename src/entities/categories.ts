@@ -14,8 +14,8 @@ export class Categories {
   categoriesId!: number;
 
   @Column()
-  categoruesName!: string;
+  categoriesName!: string;
 
   @OneToMany(() => subCategories, (subCategories) => subCategories.Categories)
-  subCategories!: subCategories;
+  subCategories!: subCategories[];
 }

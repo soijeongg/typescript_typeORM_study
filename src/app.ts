@@ -2,13 +2,14 @@ import express, { Request, Response } from 'express';
 import passport from 'passport';
 import router from './router';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv'
 import cors from 'cors';
 import passportConfig from './utils/passportConfig';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import path  from 'path'
 
-dotenv.config();
+dotenv.config({path:path.resolve(__dirname,'../.env')});
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));

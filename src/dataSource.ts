@@ -1,9 +1,15 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { User } from './entities/user';
-import dotenv from 'dotenv';
+import { Comment } from './entities/comment';
+import { Categories } from './entities/categories';
+import { subCategories } from './entities/subCategories';
+import * as dotenv from 'dotenv'
+import path from 'path';
 
-dotenv.config();
+import { Posts } from './entities/posts';
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -17,7 +23,7 @@ export const AppDataSource = new DataSource({
     rejectUnauthorized: false,
   },
   logging: process.env.TYPEORM_LOGGING === 'true',
-  entities: [User],
+  entities: [User,Posts, Comment, Categories, subCategories],
   migrations: [],
   subscribers: [],
 });
