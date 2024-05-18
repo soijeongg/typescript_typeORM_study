@@ -1,22 +1,28 @@
 import express, { Request, Response } from 'express';
-import { AppDataSource } from "./dataSource"
-import { User } from './entities/user' 
+import passport from 'passport';
 import router from './router';
-import 'dotenv'
-import cookieParser from "cookie-parser"
-import morgan  from "morgan"
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import passportConfig from './utils/passportConfig';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
 
+dotenv.config();
 const app = express();
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser())
-app.use(morgan("dev"))
+app.use(cookieParser());
+app.use(morgan('dev'));
 
+app.use(passport.initialize());
+passportConfig(passport);
 
 app.get('/', async (req: Request, res: Response) => {
-    res.send('<h1>시작하는 지점</h1>');
-  });
-  
-app.use("api",router)
+  res.send('<h1>시작하는 지점</h1>');
+});
 
+app.use('api', router);
 
-export default app
+export default app;
