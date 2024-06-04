@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node ./dist/index.js",
+    "start:dev": "tsc --watch & nodemon ./dist/index.js",
     "build": "tsc --build",
     "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
     "clean": "tsc --build --clean",

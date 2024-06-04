@@ -1,13 +1,8 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { User } from './entities/user';
-import { Comment } from './entities/comment';
-import { Categories } from './entities/categories';
-import { subCategories } from './entities/subCategories';
+import { User, Comment,Posts, Categories,subCategories, AccessToken, RefreshToken,BlacklistedToken } from './entities';
 import * as dotenv from 'dotenv'
 import path from 'path';
-
-import { Posts } from './entities/posts';
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
@@ -23,7 +18,7 @@ export const AppDataSource = new DataSource({
     rejectUnauthorized: false,
   },
   logging: process.env.TYPEORM_LOGGING === 'true',
-  entities: [User,Posts, Comment, Categories, subCategories],
+  entities: [User,Posts, Comment, Categories, subCategories,AccessToken, RefreshToken, BlacklistedToken],
   migrations: [],
   subscribers: [],
 });

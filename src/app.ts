@@ -8,6 +8,7 @@ import passportConfig from './utils/passportConfig';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import path  from 'path'
+import errorHandler from './middleware/errorHandler';
 
 dotenv.config({path:path.resolve(__dirname,'../.env')});
 const app = express();
@@ -26,4 +27,5 @@ app.get('/', async (req: Request, res: Response) => {
 
 app.use('/api', router);
 
+app.use(errorHandler)
 export default app;
