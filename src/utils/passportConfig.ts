@@ -7,7 +7,6 @@ import * as dotenv from 'dotenv'
 import path  from 'path'
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
-const secretOrKey = process.env.JWT_SECRET;
 const JwtStrategy = passportJwt.Strategy;
 const ExtractJwt = passportJwt.ExtractJwt;
 const opts = {

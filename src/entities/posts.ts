@@ -12,25 +12,30 @@ import { subCategories } from './subCategories';
 @Entity()
 export class Posts {
   @PrimaryGeneratedColumn()
-  postId!: number;
+  postId: number;
 
   @Column()
-  postName!: string;
+  postName: string;
 
   @Column()
-  postContent!: string;
+  postContent: string;
 
   @Column()
-  view!: number;
+  view: number;
 
   @ManyToOne(() => User, (User) => User.Posts)
   User!: User;
 
   @OneToMany(() => Comment, (Comment) => Comment.Posts)
-  Comment!: Comment[];
+  Comments!: Comment[];
 
   @ManyToOne(() => subCategories, (subCategories) => subCategories.Posts)
   subCategories!: subCategories;
 
-  //한개의  포스트는 여러개의 댓글을 가질 수 있고 여러개의 댓글은 하나의 포스트를 가질 수 있다
+  constructor(postId:number,postName:string, postContent:string, view:number, comments:string){
+    this.postId = postId;
+    this.postName = postName
+    this.postContent = postContent
+    this.view = view
+  }
 }
