@@ -1,5 +1,4 @@
 import { AppDataSource } from '../dataSource';
-import { getRepository } from 'typeorm';
 import { IUser } from '../interfaces/user/iuser';
 import { IuserRespository } from '../interfaces/user/iuserRespository';
 import {
@@ -9,27 +8,27 @@ import {
 import { User } from '../entities';
 
 export class UserRepository implements IuserRespository {
-  private userRepository =  AppDataSource.getRepository(User); //유저를 레포지토리라고 한거네 
+  private userRepository = AppDataSource.getRepository(User); //유저를 레포지토리라고 한거네
   constructor() {}
   async createUser(userRequest: IUserRequest): Promise<IUser> {
-  
-    const newUser =  this.userRepository.create(userRequest);
- // 새 엔티티 로그
-// 데이터베이스에 새 유저 엔티티 저장
-const existingUser = await this.userRepository.findOne({ where: { email: userRequest.email } });
-if (existingUser) {
-  throw new Error('이메일이 이미 존재합니다');
-}
-const savedUser = await this.userRepository.save(newUser);
-console.log('Saved user:', savedUser);
+    const newUser = this.userRepository.create(userRequest);
+    // 새 엔티티 로그
+    // 데이터베이스에 새 유저 엔티티 저장
+    const existingUser = await this.userRepository.findOne({
+      where: { email: userRequest.email },
+    });
+    if (existingUser) {
+      throw new Error('이메일이 이미 존재합니다');
+    }
+    const savedUser = await this.userRepository.save(newUser);
 
-// 저장된 유저 정보를 IUser 인터페이스에 맞게 반환
-return {
-  userId: savedUser.userId,
-  email: savedUser.email,
-  password: savedUser.password,
-  name: savedUser.name,
-};
+    // 저장된 유저 정보를 IUser 인터페이스에 맞게 반환
+    return {
+      userId: savedUser.userId,
+      email: savedUser.email,
+      password: savedUser.password,
+      name: savedUser.name,
+    };
   }
   async getAllUsers(): Promise<IUser[]> {
     return await this.userRepository.find();
@@ -41,15 +40,13 @@ return {
     userId: number,
     user: Partial<IUserUpdateRequest>,
   ): Promise<IUser | null> {
-     const updateUser = await this.userRepository.update(userId, user);
-     if(updateUser) {
+    const updateUser = await this.userRepository.update(userId, user);
+    if (updateUser) {
       return await this.getUserByID(userId);
-     }
-     return null;
-     }
-    
-    
-  
+    }
+    return null;
+  }
+
   async deleteUser(userId: number): Promise<boolean> {
     const result = await this.userRepository.delete(userId);
     return result.affected != 0;
@@ -57,10 +54,8 @@ return {
   //affected는 typeorm애 재공하는 속성 중 하나 실제로 영향받은 줄의 행의 수를 나타냄
 
   async checkId(userEmail: string): Promise<IUser | null> {
-      //이메일이 있는지를 확인한다 
-      const email = userEmail;
-      return  await this.userRepository.findOne({where: { email}});
-
+    //이메일이 있는지를 확인한다
+    const email = userEmail;
+    return await this.userRepository.findOne({ where: { email } });
   }
 }
-
