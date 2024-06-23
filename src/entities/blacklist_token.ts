@@ -14,7 +14,7 @@ export class BlacklistedToken {
   @Column('timestamp')
   expiresAt: Date;
 
-  constructor(id:number, token:string, createdAt:Date, expiresAt:Date) {
+  constructor(id: number, token: string, createdAt: Date, expiresAt: Date) {
     this.id = id;
     this.createdAt = createdAt;
     this.token = token;

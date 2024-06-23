@@ -2,15 +2,15 @@ import express, { Request, Response } from 'express';
 import passport from 'passport';
 import router from './router';
 import bodyParser from 'body-parser';
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
 import cors from 'cors';
 import passportConfig from './utils/passportConfig';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import path  from 'path'
+import path from 'path';
 import errorHandler from './middleware/errorHandler';
 
-dotenv.config({path:path.resolve(__dirname,'../.env')});
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,5 +27,5 @@ app.get('/', async (req: Request, res: Response) => {
 
 app.use('/api', router);
 
-app.use(errorHandler)
+app.use(errorHandler);
 export default app;
