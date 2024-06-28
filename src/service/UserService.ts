@@ -5,7 +5,7 @@ import {
   IUserUpdateRequest,
 } from '../interfaces/user/iuserRequest';
 import { IUser } from '../interfaces/user/iuser';
-import { UserRepository } from '../respository/UserRespository';
+import { UserRepository } from '../respository';
 import * as argon2 from 'argon2';
 
 export class UserService implements IuserService {
@@ -41,5 +41,9 @@ export class UserService implements IuserService {
       return null;
     }
     return getUserId;
+  }
+  async getallUserService(): Promise<IUser[]> {
+    const user = await this.UserRepository.getAllUsers();
+    return user;
   }
 }

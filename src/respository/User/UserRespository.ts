@@ -1,11 +1,11 @@
-import { AppDataSource } from '../dataSource';
-import { IUser } from '../interfaces/user/iuser';
-import { IuserRespository } from '../interfaces/user/iuserRespository';
+import { AppDataSource } from '../../dataSource';
+import { IUser } from '../../interfaces/user/iuser';
+import { IuserRespository } from '../../interfaces/user/iuserRespository';
 import {
   IUserRequest,
   IUserUpdateRequest,
-} from '../interfaces/user/iuserRequest';
-import { User } from '../entities';
+} from '../../interfaces/user/iuserRequest';
+import { User } from '../../entities';
 
 export class UserRepository implements IuserRespository {
   private userRepository = AppDataSource.getRepository(User); //유저를 레포지토리라고 한거네
