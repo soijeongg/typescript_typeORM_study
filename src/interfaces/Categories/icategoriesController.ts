@@ -1,27 +1,31 @@
 import { Request, Response, NextFunction } from 'express';
 
-export interface IuserController {
-  signupController(
+export interface IcatergoriesController {
+  createCatergoriesController(
     req: Request,
     res: Response,
     next: NextFunction,
   ): Promise<Response>;
 
-  updateUsercontroller(
+  updateCategoriesController(
     req: Request,
     res: Response,
     next: NextFunction,
   ): Promise<Response>;
 
-  deleteUsercontroller(
+  getCategoriesController(
     req: Request,
     res: Response,
     next: NextFunction,
   ): Promise<Response>;
 
-  getUserIdController(req: Request, res: Response): Promise<Response>;
+  deleteCategoriesController(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response>;
 
-  getAlluserController(
+  getAllCategoriesController(
     req: Request,
     res: Response,
     next: NextFunction,

@@ -1,16 +1,15 @@
 import {
   Entity,
-  PrimaryColumnOptions,
+  PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  PrimaryColumn,
   OneToMany,
 } from 'typeorm';
 import { subCategories } from './subCategories';
 
 @Entity()
 export class Categories {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   categoriesId!: number;
 
   @Column()

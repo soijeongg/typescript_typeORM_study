@@ -1,7 +1,7 @@
 export class checkEmailDto {
-    email: string;
+  email: string;
 
-    constructor(email:string) {
-        this.email = email;
-    }
+  constructor(email: string) {
+    this.email = email;
+  }
 }

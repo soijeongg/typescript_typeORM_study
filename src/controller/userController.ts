@@ -9,6 +9,7 @@ export class UserController implements IuserController {
     this.userService = userService;
     this.signupController = this.signupController.bind(this);
     this.deleteUsercontroller = this.deleteUsercontroller.bind(this);
+    this.getAlluserController = this.getAlluserController.bind(this);
   }
 
   async signupController(
@@ -30,6 +31,23 @@ export class UserController implements IuserController {
       return res.status(400).json({ error: '회원 가입에 실패했습니다' });
     }
   }
+  async getAlluserController(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response> {
+    try {
+      const allUser = await this.userService.getallUserService();
+      if (!allUser) {
+        return res.status(400).json({ error: '다시 시도해주세요' });
+      }
+      return res.status(201).json({ allUser });
+    } catch (error) {
+      next(error);
+      return res.status(400).json({ error: '다시 시도해주세요' });
+    }
+  }
+
   async updateUsercontroller(
     req: Request,
     res: Response,
