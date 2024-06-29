@@ -6,4 +6,10 @@ export interface iauthController {
     res: Response,
     next: NextFunction,
   ): Promise<Response | void>;
+
+  logOutController(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response | void>;
 }

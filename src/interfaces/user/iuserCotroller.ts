@@ -5,7 +5,7 @@ export interface IuserController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<Response>;
+  ): Promise<Response | void>;
 
   updateUsercontroller(
     req: Request,

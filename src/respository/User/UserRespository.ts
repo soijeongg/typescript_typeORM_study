@@ -41,7 +41,7 @@ export class UserRepository implements IuserRespository {
     user: Partial<IUserUpdateRequest>,
   ): Promise<IUser | null> {
     const updateUser = await this.userRepository.update(userId, user);
-    if (updateUser) {
+    if (updateUser.affected) {
       return await this.getUserByID(userId);
     }
     return null;

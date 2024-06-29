@@ -1,10 +1,10 @@
-import { Entity, Column, PrimaryColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { User } from './index';
 
 @Entity()
 export class AccessToken {
-  @PrimaryColumn()
-  tokenId: number;
+  @PrimaryGeneratedColumn()
+  tokenId!: number;
 
   @Column()
   jti: string;
@@ -20,13 +20,11 @@ export class AccessToken {
   user!: User;
 
   constructor(
-    tokenId: number,
     jti: string,
     createdAt: Date,
     isRevoked: boolean,
     expirationDate: Date,
   ) {
-    this.tokenId = tokenId;
     this.jti = jti;
     this.createdAt = createdAt;
     this.isRevoked = isRevoked;

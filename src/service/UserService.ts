@@ -22,10 +22,14 @@ export class UserService implements IuserService {
     userId: number,
     user: IUserUpdateRequest,
   ): Promise<IUser | null> {
+    if (user.password) {
+      user.password = await argon2.hash(user.password);
+    }
     const updatedUser = await this.UserRepository.updateUser(userId, user);
     if (!updatedUser) {
       throw new Error('유저를 찾을 수 없거나 업데이트를 할 수 없습니다');
     }
+    console.log(updatedUser, 'sds');
     return updatedUser;
   }
   async deleteUserService(userId: number): Promise<boolean> {

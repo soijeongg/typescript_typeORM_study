@@ -1,9 +1,9 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class BlacklistedToken {
-  @PrimaryColumn()
-  id: number;
+  @PrimaryGeneratedColumn()
+  id!: number;
 
   @Column()
   token: string;
@@ -14,8 +14,7 @@ export class BlacklistedToken {
   @Column('timestamp')
   expiresAt: Date;
 
-  constructor(id: number, token: string, createdAt: Date, expiresAt: Date) {
-    this.id = id;
+  constructor( token: string, createdAt: Date, expiresAt: Date) {
     this.createdAt = createdAt;
     this.token = token;
     this.expiresAt = expiresAt;

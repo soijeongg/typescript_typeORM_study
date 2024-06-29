@@ -10,5 +10,5 @@ const AuthService = new authService(AuthRepostiory);
 const authController = new AuthController(AuthService);
 
 router.post('/login', checkLoginHandler, authController.loginController);
-
+router.get('/logout', checkLoginHandler, authController.logOutController);
 export default router;
