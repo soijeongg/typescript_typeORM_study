@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { IuserController } from '../interfaces/user/iuserCotroller';
 import { UserService } from '../service/UserService';
 import { createUserDTO, updateUserDTO } from '../DTO';
+import { JwtPayload } from 'jsonwebtoken';
 export class UserController implements IuserController {
   private userService: UserService;
 
@@ -10,13 +11,17 @@ export class UserController implements IuserController {
     this.signupController = this.signupController.bind(this);
     this.deleteUsercontroller = this.deleteUsercontroller.bind(this);
     this.getAlluserController = this.getAlluserController.bind(this);
+    this.getUserIdController = this.getUserIdController.bind(this);
+    this.updateUsercontroller = this.updateUsercontroller.bind(this);
   }
-
+  //자바스크립트는 기본적으로 자신이 호출된 컨텍스트를 참조하는데 클래스의 메서드를 다른곳에서 사용할때
+  // this가 기대한 대로 클래스 인스턴스를 가르키지 않을 수 있음
+  //this를  제대로 바인딩하면 이 유저 컨트롤러를 가르키게 됨
   async signupController(
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<Response> {
+  ): Promise<Response | void> {
     try {
       const { username, email, password } = req.body;
 
@@ -27,8 +32,7 @@ export class UserController implements IuserController {
       }
       return res.status(201).json(user);
     } catch (error) {
-      next(error);
-      return res.status(400).json({ error: '회원 가입에 실패했습니다' });
+      return next(error);
     }
   }
   async getAlluserController(
@@ -54,8 +58,8 @@ export class UserController implements IuserController {
     next: NextFunction,
   ): Promise<Response> {
     try {
-      res.locals.userId = 1; //임시로 아이디를 만들기
-      const userId = res.locals.userId;
+      const user = req.user as any;
+      const userId = user.id;
       const { password, name } = req.body;
       if (!password && !name) {
         return res
@@ -114,8 +118,8 @@ export class UserController implements IuserController {
     next: NextFunction,
   ): Promise<Response> {
     try {
-      res.locals.userId = 1; //임시로 만든 아이디 아이디들어오면 로컬에 저장
-      const userId = res.locals.userId;
+      const user = req.user as any;
+      const userId = user.id;
       const deleteUser = await this.userService.deleteUserService(userId);
       if (!deleteUser) {
         return res
@@ -131,8 +135,9 @@ export class UserController implements IuserController {
     }
   }
   async getUserIdController(req: Request, res: Response): Promise<Response> {
-    res.locals.userId = 1; //임시 아이디
-    const userId = res.locals.userId;
+    const user = req.user as any;
+    const userId = user.id;
+    console.log(userId);
     const getId = await this.userService.getUserbyIdService(userId);
     if (!getId) {
       return res

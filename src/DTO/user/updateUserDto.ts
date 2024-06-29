@@ -1,8 +1,12 @@
 export class updateUserDTO {
-  name?: string;
+  username?: string;
   password?: string;
-  constructor(name?: string, password?: string) {
-    this.name = name;
-    this.password = password;
+  constructor(username?: string, password?: string) {
+    if (username !== undefined) {
+      this.username = username;
+    }
+    if (password !== undefined) {
+      this.password = password;
+    }
   }
 }
