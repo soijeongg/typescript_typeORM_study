@@ -1,5 +1,5 @@
 export interface IcategoriesRequest {
-  categoriesName: string;
+  categoriesId: number;
 }
 export interface IcategoriesupdateRequest {
   categoriesId: number;
@@ -8,6 +8,6 @@ export interface IcategoriesupdateRequest {
 export interface IcategoriesDeleteRequest {
   categoriesId: number;
 }
-export interface IcategoriesGetRequest {
-  categoriesId: number;
+export interface IcategoriescreateRequest {
+  categoriesName: string;
 }

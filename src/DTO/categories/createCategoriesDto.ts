@@ -1,5 +1,5 @@
 export class createCategoiresDto {
-  categoriesName: String;
+  categoriesName: string;
   constructor(categoriesName: string) {
     this.categoriesName = categoriesName;
   }

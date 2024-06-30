@@ -3,9 +3,9 @@ import { Icategories } from '../../interfaces/Categories/icategories';
 import { IcategoriesRepository } from '../../interfaces/Categories/icategoriesRepository';
 import {
   IcategoriesDeleteRequest,
-  IcategoriesGetRequest,
   IcategoriesRequest,
   IcategoriesupdateRequest,
+  IcategoriescreateRequest,
 } from '../../interfaces/Categories/icategoriesRequest';
 import { Categories } from '../../entities';
 
@@ -13,9 +13,12 @@ export class categoriesRepository implements IcategoriesRepository {
   private categoriesRepository = AppDataSource.getRepository(Categories);
   constructor() {}
 
-  async createCategoires(categories: IcategoriesRequest): Promise<Icategories> {
+  async createCategoires(
+    categories: IcategoriescreateRequest,
+  ): Promise<Icategories> {
     const newCategories = await this.categoriesRepository.create(categories);
-    return newCategories;
+    const saveCategories = await this.categoriesRepository.save(newCategories);
+    return saveCategories;
   }
   async updateCategoires(
     categories: IcategoriesupdateRequest,
@@ -35,9 +38,9 @@ export class categoriesRepository implements IcategoriesRepository {
     }
     return updateCategoires;
   }
-  async getCategories(categories: IcategoriesGetRequest): Promise<Icategories> {
+  async getCategories(categories: number): Promise<Icategories> {
     const findOneCategories = await this.categoriesRepository.findOne({
-      where: { categoriesId: categories.categoriesId },
+      where: { categoriesId: categories },
     });
     if (!findOneCategories) {
       throw new Error('찾으시려는 카테고리가 없습니다 ');
