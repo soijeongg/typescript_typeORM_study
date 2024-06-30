@@ -3,25 +3,24 @@ import { IcategoriesRepository } from './icategoriesRepository';
 import {
   IcategoriesRequest,
   IcategoriesDeleteRequest,
-  IcategoriesGetRequest,
   IcategoriesupdateRequest,
+  IcategoriescreateRequest,
 } from './icategoriesRequest';
 
 export interface IcategoriesService {
-  createCategoriesService(categories: IcategoriesRequest): Promise<Icategories>;
+  createCategoriesService(
+    categories: IcategoriescreateRequest,
+  ): Promise<Icategories | null>;
 
   updateCategoriesService(
     categories: IcategoriesupdateRequest,
-  ): Promise<Icategories>;
+  ): Promise<Icategories | null>;
 
-  getCategoriesService(categories: IcategoriesGetRequest): Promise<Icategories>;
+  getCategoriesService(): Promise<Icategories[] | null>;
   deleteCategoriesServie(
     categories: IcategoriesDeleteRequest,
   ): Promise<boolean>;
-
-  updateCategoriesService(
-    categories: IcategoriesupdateRequest,
-  ): Promise<Icategories>;
-
-  getAllCategoriesService(): Promise<Icategories[]>;
+  getCategoriesIdService(
+    categories: IcategoriesRequest,
+  ): Promise<Icategories | null>;
 }
