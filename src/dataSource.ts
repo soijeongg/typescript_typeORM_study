@@ -37,7 +37,7 @@ export const AppDataSource = new DataSource({
     RefreshToken,
     BlacklistedToken,
   ],
-  migrations: [],
+  migrations: ['src/database/migrations/**/*.ts'],
   subscribers: [],
 });
 

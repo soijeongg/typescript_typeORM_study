@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { authService } from '../service/authService';
-import { createUserDTO } from '../DTO';
 import { iauthController } from '../interfaces/auth/iauthController';
 import passport from 'passport';
 import { v4 as uuidv4 } from 'uuid';

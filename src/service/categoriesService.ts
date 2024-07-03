@@ -2,12 +2,9 @@ import { IcategoriesService } from '../interfaces/Categories/IcategoriesService'
 import { categoriesRepository } from '../respository/Categories/categoriesRepository';
 import { IcategoriesRepository } from '../interfaces/Categories/icategoriesRepository';
 import { Icategories } from '../interfaces/Categories/icategories';
-import { IcategoriescreateRequest } from '../interfaces/Categories/icategoriesRequest';
-import {
-  IcategoriesDeleteRequest,
-  IcategoriesRequest,
-  IcategoriesupdateRequest,
-} from '../interfaces/Categories/icategoriesRequest';
+import { createCategoiresDto } from '../DTO/categories/createCategoriesDto';
+import { updateCategoriesDTO } from '../DTO/categories/updateCategoriesDto';
+import { categoriesDTO } from '../DTO/categories/categoriesDTO';
 
 export class categoriesService implements IcategoriesService {
   private CategoriesRepository: IcategoriesRepository;
@@ -23,7 +20,7 @@ export class categoriesService implements IcategoriesService {
     return getAll;
   }
   public async getCategoriesIdService(
-    categories: IcategoriesRequest,
+    categories: categoriesDTO,
   ): Promise<Icategories | null> {
     const getCategories = await this.CategoriesRepository.getCategories(
       categories.categoriesId,
@@ -35,7 +32,7 @@ export class categoriesService implements IcategoriesService {
   }
 
   public async createCategoriesService(
-    categories: IcategoriescreateRequest,
+    categories: createCategoiresDto,
   ): Promise<Icategories | null> {
     const getCategoriesId =
       await this.CategoriesRepository.createCategoires(categories);
@@ -45,7 +42,7 @@ export class categoriesService implements IcategoriesService {
     return getCategoriesId;
   }
   public async updateCategoriesService(
-    categories: IcategoriesupdateRequest,
+    categories: updateCategoriesDTO,
   ): Promise<Icategories | null> {
     const updateCategories =
       await this.CategoriesRepository.updateCategoires(categories);
@@ -55,7 +52,7 @@ export class categoriesService implements IcategoriesService {
     return updateCategories;
   }
   public async deleteCategoriesServie(
-    categories: IcategoriesDeleteRequest,
+    categories: categoriesDTO,
   ): Promise<boolean> {
     const deleteCategories =
       await this.CategoriesRepository.deleteCategories(categories);

@@ -1,16 +1,13 @@
 import { AppDataSource } from '../../dataSource';
 import { IUser } from '../../interfaces/user/iuser';
 import { IuserRespository } from '../../interfaces/user/iuserRespository';
-import {
-  IUserRequest,
-  IUserUpdateRequest,
-} from '../../interfaces/user/iuserRequest';
+import { updateUserDTO, createUserDTO } from '../../DTO';
 import { User } from '../../entities';
 
 export class UserRepository implements IuserRespository {
   private userRepository = AppDataSource.getRepository(User); //유저를 레포지토리라고 한거네
   constructor() {}
-  async createUser(userRequest: IUserRequest): Promise<IUser> {
+  async createUser(userRequest: createUserDTO): Promise<IUser> {
     const newUser = this.userRepository.create(userRequest);
     // 새 엔티티 로그
     // 데이터베이스에 새 유저 엔티티 저장
@@ -38,7 +35,7 @@ export class UserRepository implements IuserRespository {
   }
   async updateUser(
     userId: number,
-    user: Partial<IUserUpdateRequest>,
+    user: Partial<updateUserDTO>,
   ): Promise<IUser | null> {
     const updateUser = await this.userRepository.update(userId, user);
     if (updateUser.affected) {

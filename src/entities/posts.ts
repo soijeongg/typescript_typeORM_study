@@ -34,8 +34,8 @@ export class Posts {
 
   constructor(postId:number,postName:string, postContent:string, view:number, comments:string){
     this.postId = postId;
-    this.postName = postName
-    this.postContent = postContent
-    this.view = view
+    this.postName = postName;
+    this.postContent = postContent;
+    this.view = view;
   }
 }

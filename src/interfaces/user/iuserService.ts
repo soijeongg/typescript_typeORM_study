@@ -1,14 +1,11 @@
 import { IuserRespository } from './iuserRespository';
 import { IUser } from './iuser';
-import { IUserRequest, IUserUpdateRequest } from './iuserRequest';
+import { createUserDTO, updateUserDTO } from '../../DTO';
 
 export interface IuserService {
-  createUserService(user: IUserRequest): Promise<IUser>;
+  createUserService(user: createUserDTO): Promise<IUser>;
 
-  updateUserService(
-    userId: number,
-    user: IUserUpdateRequest,
-  ): Promise<IUser | null>;
+  updateUserService(userId: number, user: updateUserDTO): Promise<IUser | null>;
 
   getUserbyIdService(userId: number): Promise<IUser | null>;
 

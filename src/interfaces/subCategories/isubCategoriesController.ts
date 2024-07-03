@@ -1,31 +1,31 @@
 import { Request, Response, NextFunction } from 'express';
 
-export interface IcatergoriesController {
-  createCatergoriesController(
+export interface ISubCategoriesController {
+  createSubCategoriesController(
     req: Request,
     res: Response,
     next: NextFunction,
   ): Promise<Response | void>;
 
-  updateCategoriesController(
+  updateSubCategoriesController(
     req: Request,
     res: Response,
     next: NextFunction,
   ): Promise<Response | void>;
 
-  getCategoriesController(
+  deleteSubCategoriesController(
     req: Request,
     res: Response,
     next: NextFunction,
   ): Promise<Response | void>;
 
-  deleteCategoriesController(
+  getAllSubCatergoriesController(
     req: Request,
     res: Response,
     next: NextFunction,
   ): Promise<Response | void>;
 
-  getAllCategoriesController(
+  getIdSubcategoriesController(
     req: Request,
     res: Response,
     next: NextFunction,

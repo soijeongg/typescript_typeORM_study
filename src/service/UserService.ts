@@ -1,9 +1,6 @@
 import { IuserService } from '../interfaces/user/iuserService';
 import { IuserRespository } from '../interfaces/user/iuserRespository';
-import {
-  IUserRequest,
-  IUserUpdateRequest,
-} from '../interfaces/user/iuserRequest';
+import { createUserDTO, updateUserDTO } from '../DTO';
 import { IUser } from '../interfaces/user/iuser';
 import { UserRepository } from '../respository';
 import * as argon2 from 'argon2';
@@ -14,13 +11,13 @@ export class UserService implements IuserService {
   constructor(userRepository: IuserRespository) {
     this.UserRepository = userRepository;
   }
-  async createUserService(userRequest: IUserRequest): Promise<IUser> {
+  async createUserService(userRequest: createUserDTO): Promise<IUser> {
     userRequest.password = await argon2.hash(userRequest.password);
     return await this.UserRepository.createUser(userRequest);
   }
   async updateUserService(
     userId: number,
-    user: IUserUpdateRequest,
+    user: updateUserDTO,
   ): Promise<IUser | null> {
     if (user.password) {
       user.password = await argon2.hash(user.password);

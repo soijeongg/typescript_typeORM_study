@@ -1,26 +1,22 @@
 import { Icategories } from './icategories';
 import { IcategoriesRepository } from './icategoriesRepository';
-import {
-  IcategoriesRequest,
-  IcategoriesDeleteRequest,
-  IcategoriesupdateRequest,
-  IcategoriescreateRequest,
-} from './icategoriesRequest';
-
+import { createCategoiresDto } from '../../DTO/categories/createCategoriesDto';
+import { updateCategoriesDTO } from '../../DTO/categories/updateCategoriesDto';
+import { getAndDeleteSubCategoriesDto } from '../../DTO/subCategories/subCategoriesDto';
 export interface IcategoriesService {
   createCategoriesService(
-    categories: IcategoriescreateRequest,
+    categories: createCategoiresDto,
   ): Promise<Icategories | null>;
 
   updateCategoriesService(
-    categories: IcategoriesupdateRequest,
+    categories: updateCategoriesDTO,
   ): Promise<Icategories | null>;
 
   getCategoriesService(): Promise<Icategories[] | null>;
   deleteCategoriesServie(
-    categories: IcategoriesDeleteRequest,
+    categories: getAndDeleteSubCategoriesDto,
   ): Promise<boolean>;
   getCategoriesIdService(
-    categories: IcategoriesRequest,
+    categories: getAndDeleteSubCategoriesDto,
   ): Promise<Icategories | null>;
 }

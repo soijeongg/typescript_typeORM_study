@@ -3,7 +3,6 @@ import { IcatergoriesController } from '../interfaces/Categories/icategoriesCont
 import { categoriesService } from "../service/categoriesService";
 import { createCategoiresDto } from "../DTO/categories/createCategoriesDto";
 import { updateCategoriesDTO } from "../DTO/categories/updateCategoriesDto";
-import { IcategoriesRequest } from "../interfaces/Categories/icategoriesRequest";
 import { categoriesDTO } from "../DTO/categories/categoriesDTO";
 
 export class categoriesController implements IcatergoriesController {
@@ -25,7 +24,7 @@ export class categoriesController implements IcatergoriesController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<Response> {
+  ): Promise<Response | void> {
     try {
       const { categoriesName } = req.body;
       const categoriesRequest = new createCategoiresDto(categoriesName);
@@ -37,14 +36,13 @@ export class categoriesController implements IcatergoriesController {
       return res.status(200).json({ message: createCategories });
     } catch (error) {
       next(error);
-      return res.status(400).json({ error: '다시 시도해주세요' });
     }
   }
   public async updateCategoriesController(
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<Response> {
+  ): Promise<Response | void> {
     try {
       const { categoriesName } = req.body;
       const { categoriesId } = req.params;
@@ -63,20 +61,18 @@ export class categoriesController implements IcatergoriesController {
       return res.status(201).json({ message: updateCategoies });
     } catch (error) {
       next(error);
-      return res.status(500).json({ error: '서버 에러가 발생했습니다' });
     }
   }
   public async getAllCategoriesController(
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<Response> {
+  ): Promise<Response | void> {
     try {
       const getAll = await this.categoriesService.getCategoriesService();
       return res.status(201).json({ message: getAll });
     } catch (error) {
       next(error);
-      return res.status(500).json({ error: '서버 에러' });
     }
   }
 
@@ -84,7 +80,7 @@ export class categoriesController implements IcatergoriesController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<Response> {
+  ): Promise<Response | void> {
     const { categoriesId } = req.params;
     const categoriesIdInt = parseInt(categoriesId, 10);
     const categories = new categoriesDTO(categoriesIdInt);
@@ -100,7 +96,7 @@ export class categoriesController implements IcatergoriesController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<Response> {
+  ): Promise<Response | void> {
     const { categoriesId } = req.params;
     const categoriesIdInt = parseInt(categoriesId, 10);
     const categories = new categoriesDTO(categoriesIdInt);
